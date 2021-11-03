@@ -19,6 +19,9 @@ const connect = function() {
     console.log(data);
   });
 
+  conn.on('close', ()=>{
+    process.exit();
+  });
   return conn;
 };
 
