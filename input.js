@@ -1,4 +1,6 @@
+const { CONTROLS } = require("./constants");
 let conn;
+
 const setupInput = function(connection) {
   conn = connection;
   const stdin = process.stdin;
@@ -14,16 +16,11 @@ const handleUserInput = (key)=>{
     console.log();
     process.exit();
   }
-
-  key === 'w' ? conn.write('Move: up') :
-    key === 'a' ? conn.write('Move: left') :
-      key === 's' ? conn.write('Move: down') :
-        key === 'd' ? conn.write('Move: right') :
-          key === 'e' ? conn.write('Say: EZ PZ') :
-            key === 'q' ? conn.write('Say: OOF') :
-              key === 'x' ? conn.write('Say: COMIN THRU!') :
-                key === 'f' ? conn.write('Say: MINE NOW! LUL') :
-                  console.log('Invalid Key');
+  if (CONTROLS[key])
+    conn.write(CONTROLS[key]);
+  else console.log('Invalid Key');
 };
 
-module.exports = {setupInput};
+module.exports = {
+  setupInput,
+};
